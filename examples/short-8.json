@@ -46,7 +46,8 @@
    "source": "Source: Good Culture market analysis. Five of the eight functional beverage segments."
   },
   {
-   "from": "statcards-3-cream",
+   "from": "statcards-3",
+   "chapter": "orange",
    "title": "Why fermented bases fit the moment",
    "lead": "Shoppers want one clear benefit, less sugar and a label they recognise.",
    "cards": [
@@ -73,8 +74,9 @@
    "sw": "7"
   },
   {
-   "from": "timeline-4-light",
+   "from": "timeline-4",
    "chapter": "pink",
+   "sw": "99",
    "lead": "We help you turn your idea into a functional drink that's ready to launch. At each stage, you'll know what happens next."
   },
   {

@@ -68,7 +68,7 @@ subject. Count cover and close in the page count.
 | Stages with timings | `timeline-*` |
 | The buyer's problems | `chal-*`, `problemfix-*`, `bigicons-*` |
 | Us against the alternatives | `s-compare` |
-| Market figures | `statcards-*` (the number is the story; `-cream` for a quiet slide), `s-chart` (a trend or comparison) |
+| Market figures | `statcards-*` (the number is the story), `s-chart` (a trend or comparison) |
 | Three facts that prove a point | `facts-*`, `m-band-*` |
 | Specs or a range | `table-full`, `table-side`, `range` |
 | Reach, proof on shelf | `global-*`, `retail-panel`, `certs-*`, `case-*` |
@@ -84,9 +84,10 @@ Pick the variant by how many items you have: never pad to fill a layout, never c
 
 Aim for every one of these. The check notes most of them when they're missing.
 
-- **Every chapter of two or more slides has one quiet slide and one with energy.** Quiet means a white, cream or
-  photo ground. Energy means full colour: a swirl slide, a chart, an icon row, a photo half. A chapter that's all
-  colour shouts; a chapter that's all white reads like a report.
+- **Every chapter reads as one colour block.** Every slide in it sits on that chapter's colour pair, so you can
+  tell where a chapter starts and ends from the contact sheet alone (section 4).
+- **Variety comes from layout, not from dropping the colour.** Within a chapter, mix full colour, a photo half,
+  and a black panel on the colour, so no two slides feel the same.
 - **At least one swirl slide in any deck of five or more body slides**, two or more in a pitch. The swirls are
   what makes a deck look like Good Culture. Slides tagged `swirl` in the catalogue carry them: steps, icon rows,
   What's inside, `m-photo-*`, `m-halves-*`, `s-next`, `s-supply`.
@@ -97,24 +98,23 @@ Aim for every one of these. The check notes most of them when they're missing.
   `s-statement` share the same bottles, so don't put them next to each other.
 - **The story moves.** Market or problem, then how we help, then proof, then what happens next. Each chapter
   answers one question, and the colour changes when the question does.
-- **Pick for the message first, then for the rhythm.** If the right slide breaks the rhythm, change its
-  neighbours, not the slide.
+- **Pick for the message first.** If the right slide doesn't come in the chapter's colour, change the chapter's
+  colour or pick the nearest slide that does, never drop out of the colour.
 
-## 4. Colour and rhythm (the rules)
+## 4. Colour (the rules)
 
-- **Chapters.** Each chapter takes one colour pair and keeps it until the next chapter: sky/navy, teal/petrol,
-  pink/purple, orange/rust, lime/forest. Set `chapter` on every slide. Use a different pair for each chapter.
+- **Consistent colour per chapter. This is the main colour rule.** Each chapter takes one colour pair and keeps it
+  on every slide until the next chapter: sky/navy, teal/petrol, pink/purple, orange/rust, lime/forest. Set
+  `chapter` on every slide and use a different pair for each chapter. For an orange chapter, all of these are
+  right: a full orange slide, a slide that's half orange and half photo, a black panel on orange. A slide on
+  white, cream or another chapter's colour is wrong.
+- **White and cream are the exception.** The library has very few white or cream slides (tagged `off-chapter`).
+  They never carry the deck and are never used to break up colour. Use one only when nothing on the chapter's
+  colour can say the same thing, and tell the person why.
 - **Fixed-colour slides.** Some slides have their colour in the art, so `chapter` can't change it: they're tagged
   `fixed colour` in the catalogue (`functional` is always pink, `base-15` always teal, every `photo-*`,
   `m-drinks-*`, `m-band-*`, `m-bottles-*` and so on). Only use one in a chapter of its colour, or choose the
   chapter colour to suit it. The check fails a fixed-colour slide in the wrong chapter.
-- **Quiet slides are few, so plan them in.** Only these have a white, cream or photo ground: `timeline-4-light`,
-  `certs-white`, `statcards-3-cream`, `statcards-4-cream`, `range`, `s-photo` and `chal-photo` (tagged `quiet`).
-  Slides tagged `panel` (a black panel on colour, such as `facts-panel` and `global-site`) change the texture but
-  are not quiet. Everything else is full colour.
-- **Calm, not dull.** Follow a full-colour slide with a quieter one where you can. Never two full-colour slides of
-  the same chapter back to back. Denis and Jim: too much colour reads as noise, but no colour reads as someone
-  else's brand.
 - **Swirls.** Swirl slides take `sw`: rotate `99`, `6`, `7`, `8` through the deck so neighbours never repeat.
 - **Black** is only ever a panel on colour, never a slide background. **Yellow** is #FBE405, for the brand and
   for what must stand out (our column, the key bar, the figure).
@@ -152,19 +152,19 @@ Every slide must start `"from": "<id>"` from the catalogue; copy its structure e
 
 `check` must print `BRAND CHECK PASSED`. It fails em dashes, the contrast trope, fonts other than Engram, colours
 outside the palette, black backgrounds, text off the slide, into the footer or overlapping, pictures from outside
-the library, missing art and fixed-colour slides in the wrong chapter. Fix the spec and rerun until it passes.
+the library, missing art and any slide whose colour doesn't match its chapter (including fixed-colour slides in
+the wrong chapter). Fix the spec and rerun until it passes.
 Never get round it by editing the HTML or the check.
 
-It also prints **notes**: two full-colour slides in a row, a chapter with no quiet slide, a chapter with no
-energy, no swirl slide, no library pictures, the same layout twice. Treat each note as a question you must
-answer. Fix it, or keep it only if fixing it would mean a worse slide for the message, and tell the person why
+It also prints **notes**: a white or cream slide, no swirl slide, no library pictures, the same layout twice.
+Treat each note as a question you must answer. Fix it, or keep it only if fixing it would mean a worse slide for the message, and tell the person why
 in one line.
 
 Then **look** at `~/decks-out/<deck-name>/sheet-*.png` yourself, next to the reference deck's contact sheet,
 and open any slide in `prev/` that looks crowded. Ask:
 
 - Would Denis and Jim recognise this straight away as a Good Culture deck? Is there enough colour and swirl?
-- Does every chapter have a calm moment and a strong one?
+- Does each chapter read as one colour block, with every slide on its colour pair?
 - Is there a slide that's nearly empty, or a headline that wraps badly?
 - Does any art, photo or layout repeat?
 - Read only the headlines in order: do they tell the story of the brief?

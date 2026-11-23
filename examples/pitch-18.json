@@ -39,7 +39,9 @@
    "chapter": "sky"
   },
   {
-   "from": "certs-white"
+   "from": "certs-colour",
+   "chapter": "sky",
+   "colour": true
   },
   {
    "from": "s-divider",
@@ -85,13 +87,8 @@
    "source": "Source: Good Culture market analysis. Five of the eight functional beverage segments."
   },
   {
-   "from": "s-photo",
-   "alt": "A brewer checking stainless fermentation tanks",
-   "lines": [
-    "Up to six months of",
-    "fermentation, done for you."
-   ],
-   "sub": "So you can focus on building the drink."
+   "from": "facts-panel",
+   "chapter": "orange"
   },
   {
    "from": "m-photo-brewer",
@@ -128,8 +125,9 @@
    "chapter": "lime"
   },
   {
-   "from": "timeline-4-light",
-   "chapter": "lime"
+   "from": "timeline-4",
+   "chapter": "lime",
+   "sw": "7"
   },
   {
    "from": "s-next",

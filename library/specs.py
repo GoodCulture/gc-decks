@@ -295,12 +295,6 @@ for _s in COMPONENTS["slides"]:
     if _s["id"] == "statcards-3": _s.update(colour=True, chapter="orange")
     if _s["id"] == "statcards-4": _s.update(colour=True, chapter="teal")
 
-# Stat cards on cream, for a quiet slide in a chapter that needs one (Luke, 23 Nov). Same component with colour off.
-for _id in ("statcards-4", "statcards-3"):
-    _i = [s["id"] for s in COMPONENTS["slides"]].index(_id)
-    _q = dict(COMPONENTS["slides"][_i]); _q.update(id=_id + "-cream", colour=False); _q.pop("chapter", None)
-    COMPONENTS["slides"].insert(_i + (2 if _id == "statcards-3" else 1), _q)
-
 # Slides whose colour is in their art take that colour as their chapter, so the catalogue never suggests a mismatch.
 import json as _json, os as _osp
 _FIXED = _json.load(open(_osp.path.join(_osp.path.dirname(_osp.path.abspath(__file__)), "fixed.json")))
