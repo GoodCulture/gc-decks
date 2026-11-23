@@ -24,7 +24,7 @@
 "inside-2x2": "colour",
 "chal-wide": "colour",
 "chal-text": "colour",
-"chal-photo": "quiet",
+"chal-photo": "colour",
 "timeline-4": "panel",
 "timeline-3": "panel",
 "timeline-4-light": "quiet",
@@ -92,7 +92,5 @@
 "m-band-98": "colour",
 "m-bottles-87": "colour",
 "m-bottles-88": "colour",
-"m-bottles-89": "colour",
-"statcards-3-cream": "quiet",
-"statcards-4-cream": "quiet"
+"m-bottles-89": "colour"
 }

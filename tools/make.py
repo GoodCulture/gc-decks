@@ -144,11 +144,6 @@ async def _check(out):
             fails += [f"{i} {sid}: {m}" for m in await pg.evaluate(JS)]
             png = f"{out}/prev/{i:02d}-{sid}.png"; await pg.screenshot(path=png); grounds.append(ground(png))
         await br.close()
-    for i in range(1, len(grounds)):
-        rc = b.get("recipes", [""] * len(grounds))
-        if {rc[i - 1], rc[i]} & {"divider", "cover", "contents", "close"}: continue  # dividers open their chapter's colour
-        if grounds[i] and grounds[i] == grounds[i - 1]:
-            notes.append(f"{i + 1} {b['order'][i]}: second full-{grounds[i]} slide in a row; a quiet slide between would calm it")
     f2, n2 = quality(b, grounds); fails += f2; notes += n2
     sheet(out, b["order"])
     return fails, notes
@@ -169,20 +164,13 @@ def quality(b, grounds):
         want = fixed.get(m["from"])
         if want and m["chapter"] and m["chapter"] != want:
             fails.append(f"{i + 1} {order[i]}: always {want}, but its chapter is {m['chapter']}; put it in a {want} chapter or pick another slide")
-    # Chapters: runs of body slides sharing a chapter colour. Each wants a quiet slide and something with energy.
-    runs, prev_c, prev_i = [], None, None
-    for i in body:
-        c = meta[i]["chapter"] or prev_c  # a slide with no chapter (a full photo, white certs) belongs to the one it sits in
-        divider_between = prev_i is not None and any(rc[k] == "divider" for k in range(prev_i + 1, i))
-        if not runs or c != prev_c or divider_between: runs.append([])
-        runs[-1].append(i); prev_c, prev_i = c, i
-    for run in runs:
-        if len(run) < 2: continue
-        name = meta[run[0]]["chapter"] or "untitled"
-        if not any(quiet.get(meta[i]["from"], "quiet" if grounds[i] is None else "colour") == "quiet" for i in run):
-            notes.append(f"{run[0] + 1}-{run[-1] + 1}: the {name} chapter has no quiet slide (white, cream or photo)")
-        if all(quiet.get(meta[i]["from"]) == "quiet" for i in run):
-            notes.append(f"{run[0] + 1}-{run[-1] + 1}: the {name} chapter has no full-colour slide; it will read flat")
+    # Consistent colour per chapter: every slide sits on its chapter's colour. White and cream are the exception.
+    for i, m in enumerate(meta):
+        if rc[i] in ("cover", "close"): continue
+        if m["chapter"] and grounds[i] and grounds[i] != m["chapter"] and not fixed.get(m["from"]):
+            fails.append(f"{i + 1} {order[i]}: shows {grounds[i]}, but its chapter is {m['chapter']}")
+        if quiet.get(m["from"]) == "quiet":
+            notes.append(f"{i + 1} {order[i]}: white, cream or full-photo slide, off the chapter colour; keep it only if nothing on the colour can say this")
     # The deck as a whole.
     if len(body) >= 5 and not any(meta[i]["swirl"] and grounds[i] for i in body):
         notes.append("no swirl slide: a deck this long wants at least one (steps, icons, What's inside, m-photo, m-halves, s-next, s-supply)")
