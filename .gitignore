@@ -1,0 +1,5 @@
+__pycache__/
+ds/project/fonts/*.woff2
+engram-xb.ttf
+plates/photos/_deck-*
+plates/photos/full-_deck-*
