@@ -53,7 +53,7 @@ def h2(t, x=78, y=76, w=1100, col=INK):
 def footer(deck, n):
     return (f'<img src="{asset("wm-ink", W + "ds/project/assets/Logos/wordmark-ink.png")}" alt="Good Culture" '
             f'style="position:absolute;left:78px;top:1009px;width:397px;height:31px;object-fit:contain">'
-            f'<p style="position:absolute;left:1342px;top:1010px;width:500px;text-align:right;font-family:{FR};'
+            f'<p style="position:absolute;left:942px;top:1010px;width:900px;text-align:right;white-space:nowrap;font-family:{FR};'
             f'font-size:24px;color:{INK}">{esc(deck)} &#160;|&#160; Page {n:02d}</p>')
 
 

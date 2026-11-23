@@ -48,18 +48,20 @@ def build(spec_path, out):
             base = copy.deepcopy(cat[s["from"]]); base.update({k: v for k, v in s.items() if k != "from"})
         else:
             sys.exit(f"slide {i}: every slide must start from a library component (\"from\": ...)")
+        base["_meta"] = {"from": s["from"], "chapter": base.get("chapter"), "library_photo": "photo_file" in base, "swirl": "sw" in base}
         if "photo_file" in base:  # a picture from the SharePoint image library, saved locally
             import re as _re
             base["photo"] = photo(base.pop("photo_file"), _re.sub(r"[^a-z0-9]+", "-", f"{spec['name']}-{i}".lower()).strip("-"))
         sid = base.get("id"); seen[sid] = seen.get(sid, 0) + 1
         if seen[sid] > 1: base["id"] = f"{sid}-{seen[sid]}"
         slides.append(base)
+    meta = [s.pop("_meta") for s in slides]
     order = gdeck.build({"name": spec["name"], "slides": slides}, out)
     assets = dict(gdeck.ASSETS)
     for k, f in FONTS.items(): assets[k] = f"{GCW}ds/project/fonts/{f}.woff2"
     missing = [p for p in assets.values() if not _os.path.exists(p)]
     if missing: sys.exit("this combination needs art the library doesn't have (pick another chapter or swirl):\n" + "\n".join(missing))
-    json.dump({"order": order, "recipes": [s["r"] for s in slides], "assets": assets, "name": spec["name"]}, open(f"{out}/build.json", "w"), indent=1)
+    json.dump({"order": order, "recipes": [s["r"] for s in slides], "meta": meta, "assets": assets, "name": spec["name"]}, open(f"{out}/build.json", "w"), indent=1)
     used = set()
     for sid in order:
         h = open(f"{out}/project/slides/{sid}.html").read(); used |= set(re.findall(r"\{\{([^}]+)\}\}", h))
@@ -147,7 +149,48 @@ async def _check(out):
         if {rc[i - 1], rc[i]} & {"divider", "cover", "contents", "close"}: continue  # dividers open their chapter's colour
         if grounds[i] and grounds[i] == grounds[i - 1]:
             notes.append(f"{i + 1} {b['order'][i]}: second full-{grounds[i]} slide in a row; a quiet slide between would calm it")
+    f2, n2 = quality(b, grounds); fails += f2; notes += n2
     sheet(out, b["order"])
+    return fails, notes
+
+
+FRAME = {"divider", "cover", "contents", "close"}
+
+
+def quality(b, grounds):
+    """What a good deck has, beyond the brand rules (SKILL.md, 'What good looks like'). Fixed colours fail; the rest are notes."""
+    fails, notes = [], []
+    meta, rc, order = b.get("meta"), b.get("recipes", []), b["order"]
+    if not meta: return fails, notes
+    fixed = json.load(open(GCW + "library/fixed.json")); quiet = json.load(open(GCW + "library/grounds.json"))
+    body = [i for i in range(len(order)) if rc[i] not in FRAME]
+    # A slide whose colour is in its art must sit in a chapter of that colour.
+    for i, m in enumerate(meta):
+        want = fixed.get(m["from"])
+        if want and m["chapter"] and m["chapter"] != want:
+            fails.append(f"{i + 1} {order[i]}: always {want}, but its chapter is {m['chapter']}; put it in a {want} chapter or pick another slide")
+    # Chapters: runs of body slides sharing a chapter colour. Each wants a quiet slide and something with energy.
+    runs, prev_c, prev_i = [], None, None
+    for i in body:
+        c = meta[i]["chapter"] or prev_c  # a slide with no chapter (a full photo, white certs) belongs to the one it sits in
+        divider_between = prev_i is not None and any(rc[k] == "divider" for k in range(prev_i + 1, i))
+        if not runs or c != prev_c or divider_between: runs.append([])
+        runs[-1].append(i); prev_c, prev_i = c, i
+    for run in runs:
+        if len(run) < 2: continue
+        name = meta[run[0]]["chapter"] or "untitled"
+        if not any(quiet.get(meta[i]["from"], "quiet" if grounds[i] is None else "colour") == "quiet" for i in run):
+            notes.append(f"{run[0] + 1}-{run[-1] + 1}: the {name} chapter has no quiet slide (white, cream or photo)")
+        if all(quiet.get(meta[i]["from"]) == "quiet" for i in run):
+            notes.append(f"{run[0] + 1}-{run[-1] + 1}: the {name} chapter has no full-colour slide; it will read flat")
+    # The deck as a whole.
+    if len(body) >= 5 and not any(meta[i]["swirl"] and grounds[i] for i in body):
+        notes.append("no swirl slide: a deck this long wants at least one (steps, icons, What's inside, m-photo, m-halves, s-next, s-supply)")
+    if not any(m["library_photo"] for m in meta):
+        notes.append("no pictures from the image library: check SharePoint for photos that fit better than the built-in ones (SKILL.md, step 2)")
+    for i in range(1, len(order)):
+        if meta[i]["from"] == meta[i - 1]["from"] or (rc[i] == rc[i - 1] and rc[i] not in ("page", "divider")):
+            notes.append(f"{i + 1} {order[i]}: same layout as the slide before")
     return fails, notes
 
 

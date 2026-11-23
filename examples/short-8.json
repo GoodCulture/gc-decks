@@ -1,0 +1,117 @@
+{
+ "name": "Functional Beverages | Good Culture",
+ "slides": [
+  {
+   "from": "s-cover",
+   "title": [
+    "Building",
+    "Functional",
+    "Drinks"
+   ],
+   "label": "[Functional Beverages]",
+   "date": "November 2026"
+  },
+  {
+   "from": "s-chart",
+   "chapter": "orange",
+   "title": "Where the growth is in functional drinks",
+   "standfirst": "The functional beverage market is already past $220bn and forecast to reach $300bn by the end of the decade.",
+   "body": "Our bases work across every one of these segments, from energy drinks and RTD tea to functional water and modern soda.",
+   "chart_title": "Market size by segment ($bn)",
+   "unit": "bn",
+   "fmt": "${}",
+   "highlight": "Functional|water",
+   "data": [
+    [
+     "Energy|drinks",
+     82.58
+    ],
+    [
+     "RTD tea|and coffee",
+     40.1
+    ],
+    [
+     "Functional|water",
+     26.28
+    ],
+    [
+     "Enhanced|juice",
+     5.41
+    ],
+    [
+     "Modern|soda",
+     2.81
+    ]
+   ],
+   "source": "Source: Good Culture market analysis. Five of the eight functional beverage segments."
+  },
+  {
+   "from": "statcards-3-cream",
+   "title": "Why fermented bases fit the moment",
+   "lead": "Shoppers want one clear benefit, less sugar and a label they recognise.",
+   "cards": [
+    [
+     "35%",
+     "Gut health leads the functional shelf",
+     "Probiotics make up about 35% of the functional ingredients used in drinks today."
+    ],
+    [
+     "4.5g",
+     "Sugar rules keep tightening",
+     "The UK levy drops its threshold to 4.5g per 100ml in January 2028, so recipes need flavour without the sugar."
+    ],
+    [
+     "116",
+     "Sugar taxes are now global",
+     "At least 116 countries tax sugary drinks, so lower sugar matters for any brand selling abroad."
+    ]
+   ]
+  },
+  {
+   "from": "m-photo-tanks",
+   "chapter": "pink",
+   "sw": "7"
+  },
+  {
+   "from": "timeline-4-light",
+   "chapter": "pink",
+   "lead": "We help you turn your idea into a functional drink that's ready to launch. At each stage, you'll know what happens next."
+  },
+  {
+   "from": "icons-4",
+   "chapter": "pink",
+   "sw": "6",
+   "title": "Built for functional drinks",
+   "standfirst": "Why functional brands build on our bases.",
+   "items": [
+    [
+     "Lower sugar, full flavour",
+     "Natural acidity and body, so you can cut sugar and keep the taste.",
+     "blend2"
+    ],
+    [
+     "Clean label",
+     "Certified organic, with ingredients consumers recognise.",
+     "blend0"
+    ],
+    [
+     "No new equipment",
+     "Blends into your existing line or your co-packer's.",
+     "fix2"
+    ],
+    [
+     "Stock near you",
+     "Held in the USA, the UK, the Netherlands and Ireland.",
+     "whoink2"
+    ]
+   ]
+  },
+  {
+   "from": "case-kefir",
+   "chapter": "lime"
+  },
+  {
+   "from": "s-close"
+  }
+ ]
+}
