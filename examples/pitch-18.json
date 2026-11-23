@@ -1,0 +1,143 @@
+{
+ "name": "Company Overview | Good Culture",
+ "slides": [
+  {
+   "from": "s-cover",
+   "title": [
+    "Better Bases",
+    "For Better",
+    "Drinks"
+   ],
+   "label": "[Company Overview]",
+   "date": "November 2026"
+  },
+  {
+   "from": "s-contents",
+   "chapter": "sky",
+   "items": [
+    "Who we are",
+    "Why our bases",
+    "Our range",
+    "Working together"
+   ]
+  },
+  {
+   "from": "s-divider",
+   "chapter": "sky",
+   "title": [
+    "Part One",
+    "Who We",
+    "Are"
+   ]
+  },
+  {
+   "from": "s-who",
+   "chapter": "sky"
+  },
+  {
+   "from": "global-site",
+   "chapter": "sky"
+  },
+  {
+   "from": "certs-white"
+  },
+  {
+   "from": "s-divider",
+   "chapter": "orange",
+   "title": [
+    "Part Two",
+    "Why Our",
+    "Bases"
+   ]
+  },
+  {
+   "from": "s-chart",
+   "chapter": "orange",
+   "title": "Where the growth is in functional drinks",
+   "standfirst": "The functional beverage market is already past $220bn and forecast to reach $300bn by the end of the decade.",
+   "body": "Our bases work across every one of these segments, from energy drinks and RTD tea to functional water and modern soda.",
+   "chart_title": "Market size by segment ($bn)",
+   "unit": "bn",
+   "fmt": "${}",
+   "highlight": "Functional|water",
+   "data": [
+    [
+     "Energy|drinks",
+     82.58
+    ],
+    [
+     "RTD tea|and coffee",
+     40.1
+    ],
+    [
+     "Functional|water",
+     26.28
+    ],
+    [
+     "Enhanced|juice",
+     5.41
+    ],
+    [
+     "Modern|soda",
+     2.81
+    ]
+   ],
+   "source": "Source: Good Culture market analysis. Five of the eight functional beverage segments."
+  },
+  {
+   "from": "s-photo",
+   "alt": "A brewer checking stainless fermentation tanks",
+   "lines": [
+    "Up to six months of",
+    "fermentation, done for you."
+   ],
+   "sub": "So you can focus on building the drink."
+  },
+  {
+   "from": "m-photo-brewer",
+   "chapter": "orange",
+   "sw": "6"
+  },
+  {
+   "from": "s-divider",
+   "chapter": "teal",
+   "title": [
+    "Part Three",
+    "Our",
+    "Range"
+   ]
+  },
+  {
+   "from": "range"
+  },
+  {
+   "from": "base-15",
+   "chapter": "teal"
+  },
+  {
+   "from": "s-divider",
+   "chapter": "lime",
+   "title": [
+    "Part Four",
+    "Working",
+    "Together"
+   ]
+  },
+  {
+   "from": "case-kefir",
+   "chapter": "lime"
+  },
+  {
+   "from": "timeline-4-light",
+   "chapter": "lime"
+  },
+  {
+   "from": "s-next",
+   "chapter": "lime",
+   "sw": "8"
+  },
+  {
+   "from": "s-close"
+  }
+ ]
+}

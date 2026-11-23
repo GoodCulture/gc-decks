@@ -4,8 +4,10 @@ Claude builds Good Culture slide decks from a brief with this kit: approved slid
 brand check every deck must pass. People never use this repository directly; they give Claude a brief.
 
 - `SKILL.md`: how Claude uses the kit, start to finish.
+- `examples/`: two reference decks (a short brief and a full pitch) with contact sheets, showing what good looks like.
 - `library/specs.py`: every approved slide (`COMPONENTS`); `library/CATALOGUE.md` is generated from it by
-  `python3 tools/catalogue.py`.
+  `python3 tools/catalogue.py`. `library/grounds.json` says which slides are quiet, panel or colour;
+  `library/fixed.json` lists the slides whose colour is in their art.
 - `tools/gdeck.py`: the recipes that turn a slide spec into a 1920x1080 slide. `tools/make.py`: build, check,
   finalise.
 - `plates/`, `ds/`, `public/`: backgrounds, photos, icons. The Engram fonts are licensed and kept locked
