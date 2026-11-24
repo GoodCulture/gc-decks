@@ -137,7 +137,7 @@ COMPONENTS["slides"] += [
  {"r": "challenges", "id": "chal-photo", "chapter": "sky", "layout": "photo", "photo": "tasting", "alt": "A brewer checking a sample against the light", "title": "Challenges we help brands to overcome", "items": _C},
 ]
 
-_T = [("Book a call and tell us about your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"),
+_T = [("Get in touch and tell us your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"),
       ("Develop and test", "We help you develop your drink step by step, with real samples from our network of flavour developers.", "2 to 4 weeks"),
       ("Make sure it works at scale", "Before production, we help you check the expected cost, supply and production needs.", "1 to 2 weeks"),
       ("Scale and launch", "We work with your production team or co-packer and supply your base, so the drink stays consistent.", "Set by your schedule")]
