@@ -234,4 +234,11 @@ Don't copy library pictures into the repository.
 - Never change the kit (`library/`, `tools/`, `plates/`, `examples/`) to get one deck through. Library changes
   come from Luke.
 - Never invent statistics, customer names or quotes.
+
+## 11. Keep the design system in step
+
+The Good Culture design system (https://claude.ai/artifact/UEWy9FGSSAoYUPn5c2nTJ9) says the same as this file in
+plain English, with pictures of the library slides. When Luke changes a rule here (colour, swirls, words, layouts,
+pictures), make the same change there in the same round, and tell him both were updated. If they ever disagree,
+this file wins.
 - Never mention GitHub, repositories or commands to the person. They give a brief and get a deck.
