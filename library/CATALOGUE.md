@@ -173,17 +173,17 @@ Stages with timings, such as idea to shelf.
 
 ### timeline-4  (panel: a black panel on the chapter colour; swirl)
 ```json
-{"id": "timeline-4", "chapter": "orange", "style": "panel", "title": "Go from an idea to the shelf", "lead": "We help you turn your idea into a product that's ready to launch. At each stage, you'll know what happens next.", "stages": [["Book a call and tell us about your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"], ["Develop and test", "We help you develop your drink step by step, with real samples from our network of flavour developers.", "2 to 4 weeks"], ["Make sure it works at scale", "Before production, we help you check the expected cost, supply and production needs.", "1 to 2 weeks"], ["Scale and launch", "We work with your production team or co-packer and supply your base, so the drink stays consistent.", "Set by your schedule"]], "swirl": true, "sw": "6"}
+{"id": "timeline-4", "chapter": "orange", "style": "panel", "title": "Go from an idea to the shelf", "lead": "We help you turn your idea into a product that's ready to launch. At each stage, you'll know what happens next.", "stages": [["Get in touch and tell us your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"], ["Develop and test", "We help you develop your drink step by step, with real samples from our network of flavour developers.", "2 to 4 weeks"], ["Make sure it works at scale", "Before production, we help you check the expected cost, supply and production needs.", "1 to 2 weeks"], ["Scale and launch", "We work with your production team or co-packer and supply your base, so the drink stays consistent.", "Set by your schedule"]], "swirl": true, "sw": "6"}
 ```
 
 ### timeline-3  (panel: a black panel on the chapter colour; swirl)
 ```json
-{"id": "timeline-3", "chapter": "orange", "style": "panel", "title": "Go from an idea to the shelf", "lead": "We help you turn your idea into a product that's ready to launch. At each stage, you'll know what happens next.", "stages": [["Book a call and tell us about your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"], ["Develop and test", "We help you develop your drink step by step, with real samples from our network of flavour developers.", "2 to 4 weeks"], ["Scale and launch", "We work with your production team or co-packer and supply your base, so the drink stays consistent.", "Set by your schedule"]], "swirl": true, "sw": "7"}
+{"id": "timeline-3", "chapter": "orange", "style": "panel", "title": "Go from an idea to the shelf", "lead": "We help you turn your idea into a product that's ready to launch. At each stage, you'll know what happens next.", "stages": [["Get in touch and tell us your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"], ["Develop and test", "We help you develop your drink step by step, with real samples from our network of flavour developers.", "2 to 4 weeks"], ["Scale and launch", "We work with your production team or co-packer and supply your base, so the drink stays consistent.", "Set by your schedule"]], "swirl": true, "sw": "7"}
 ```
 
 ### timeline-4-light  (off-chapter: white, cream or full photo ground, use only when nothing on the chapter colour fits)
 ```json
-{"id": "timeline-4-light", "chapter": "orange", "style": "light", "title": "Go from an idea to the shelf", "lead": "We help you turn your idea into a product that's ready to launch. At each stage, you'll know what happens next.", "stages": [["Book a call and tell us about your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"], ["Develop and test", "We help you develop your drink step by step, with real samples from our network of flavour developers.", "2 to 4 weeks"], ["Make sure it works at scale", "Before production, we help you check the expected cost, supply and production needs.", "1 to 2 weeks"], ["Scale and launch", "We work with your production team or co-packer and supply your base, so the drink stays consistent.", "Set by your schedule"]]}
+{"id": "timeline-4-light", "chapter": "orange", "style": "light", "title": "Go from an idea to the shelf", "lead": "We help you turn your idea into a product that's ready to launch. At each stage, you'll know what happens next.", "stages": [["Get in touch and tell us your idea", "Tell us what you want to make, who it is for and the price you want to reach. We will suggest the best way forward.", "1 day to 1 week"], ["Develop and test", "We help you develop your drink step by step, with real samples from our network of flavour developers.", "2 to 4 weeks"], ["Make sure it works at scale", "Before production, we help you check the expected cost, supply and production needs.", "1 to 2 weeks"], ["Scale and launch", "We work with your production team or co-packer and supply your base, so the drink stays consistent.", "Set by your schedule"]]}
 ```
 
 ## problemfix
@@ -608,10 +608,10 @@ Master template: words with bottles art.
 
 ## Photos
 
-- `mphoto`, `casestudy` and `challenges` (chal-photo) take any photo in `plates/photos/`: _deck-functional-beverages-good-culture-4, _deck-pf-1, _deck-pf-2, _deck-pf-3, _deck-pf-4, bottling, brewer, hardkom, icedtea, kefir, kombucha, tanks, tasting.
+- `mphoto`, `casestudy` and `challenges` (chal-photo) take any photo in `plates/photos/`: bottling, brewer, hardkom, icedtea, kefir, kombucha, tanks, tasting.
   A new photo goes in `plates/photos/<name>.jpg` (landscape, about 1920px wide, under 400KB), then `photo: <name>`.
 - `photo` slides have the photo set into Jim's ring background, so only these: brewer, icedtea, kefir, kombucha, kommbru, tasting.
-- `fullphoto` uses `plates/photos/full-<name>.jpg`: _deck-functional-beverages-good-culture-4, _deck-pf-1, _deck-pf-2, _deck-pf-3, _deck-pf-4, tanks.
+- `fullphoto` uses `plates/photos/full-<name>.jpg`: tanks.
 
 ## Icons
 
