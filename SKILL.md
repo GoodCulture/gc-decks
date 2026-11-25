@@ -64,13 +64,17 @@ subject. Count cover and close in the page count.
 | A photo with a message | `m-photo-*`, `photo-*`, `s-photo` (full bleed) |
 | 3 to 6 reasons, benefits, features | `icons-*` (3, 4, 2x2, 3x2, 3-2) |
 | A process, or next steps | `steps-*`, `s-next` |
+| A workflow where the arrows matter: steps that branch into two outcomes | `flow-6`, `flow-4` (3 to 6 steps) |
+| Stages with their entry, action and outcome criteria | `criteria-3` (2 to 4 stages) |
+| Routes or lanes, with who owns each | `lanes-2` (2 or 3 routes) |
+| A numbered list of measures, metrics or checks | `list-swirl` |
 | What an offer or guide contains | `inside-*` |
 | Stages with timings | `timeline-*` |
 | The buyer's problems | `chal-*`, `problemfix-*`, `bigicons-*` |
 | Us against the alternatives | `s-compare` |
 | Market figures | `statcards-*` (the number is the story), `s-chart` (a trend or comparison) |
 | Three facts that prove a point | `facts-*`, `m-band-*` |
-| Specs or a range | `table-full`, `table-side`, `range` |
+| Specs or a range | `table-full`, `table-side`, `range` (`-swirl` versions carry a swirl top right) |
 | Reach, proof on shelf | `global-*`, `retail-panel`, `certs-*`, `case-*` |
 | Who we work with, ways we help | `s-who`, `s-routes`, `solutions` |
 | Ordering and supply | `s-supply` |

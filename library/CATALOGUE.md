@@ -86,6 +86,11 @@ Specs or a range, full width.
 {"id": "table-full", "chapter": "teal", "title": "Good Culture Range Overview", "first": 250, "rows": [["Product", "MANNA-K", "MANNA-KX", "MANNA-KN", "MANNA-FIR"], ["Description", "Organic Sugar Free Green Tea Kombucha Base", "Organic Green & Black Tea Kombucha Base", "Cloudy Organic Sugar-Free Black Tea Kombucha Base", "Organic Fermented Water Kefir Base"], ["Strength", "20x", "30x", "7x", "20x"], ["Taste", "Fermented taste with no off flavours", "Crisp, a mild tea aroma and mild astringency", "Strong black tea, traditional kombucha flavour", "Tart and lactic, similar to yogurt"], ["Dilution", "5% to 7%", "2.5% to 4%", "10% to 17%", "3% to 5%"], ["Raw", "5L, 20L, 1000L", "1000L", "5L, 20L, 1000L", "Unavailable"], ["Pasteurised", "5L, 20L, 1000L", "1000L", "5L, 20L, 1000L", "5L, 20L, 1000L"]]}
 ```
 
+### table-full-swirl  (swirl)
+```json
+{"id": "table-full-swirl", "chapter": "teal", "title": "Good Culture Range Overview", "first": 250, "rows": [["Product", "MANNA-K", "MANNA-KX", "MANNA-KN", "MANNA-FIR"], ["Description", "Organic Sugar Free Green Tea Kombucha Base", "Organic Green & Black Tea Kombucha Base", "Cloudy Organic Sugar-Free Black Tea Kombucha Base", "Organic Fermented Water Kefir Base"], ["Strength", "20x", "30x", "7x", "20x"], ["Taste", "Fermented taste with no off flavours", "Crisp, a mild tea aroma and mild astringency", "Strong black tea, traditional kombucha flavour", "Tart and lactic, similar to yogurt"], ["Dilution", "5% to 7%", "2.5% to 4%", "10% to 17%", "3% to 5%"], ["Raw", "5L, 20L, 1000L", "1000L", "5L, 20L, 1000L", "Unavailable"], ["Pasteurised", "5L, 20L, 1000L", "1000L", "5L, 20L, 1000L", "5L, 20L, 1000L"]], "sw": "8"}
+```
+
 ## table_side
 
 A table on the right with a paragraph on the left.
@@ -93,6 +98,11 @@ A table on the right with a paragraph on the left.
 ### table-side
 ```json
 {"id": "table-side", "chapter": "teal", "title": "Organic ginger juice at a glance", "standfirst": "Everything your technical team will ask first.", "body": "Pressed from certified organic Peruvian ginger and filled aseptically, so it arrives stable and ready to blend.", "first": 280, "rows": [["Spec", "Detail"], ["Product", "Organic ginger juice"], ["Origin", "Peru"], ["Certification", "Certified organic"], ["Processing", "Pasteurised and filled aseptically, with lemon juice for stability"], ["Pack sizes", "1L bag, 20L bag-in-box, 200L drum"], ["Shelf life", "3 years unopened, chilled at 0 to 5°C"], ["Availability", "UK and EU from 1 December 2026. USA from 2027"]]}
+```
+
+### table-side-swirl  (swirl)
+```json
+{"id": "table-side-swirl", "chapter": "teal", "title": "Organic ginger juice at a glance", "standfirst": "Everything your technical team will ask first.", "body": "Pressed from certified organic Peruvian ginger and filled aseptically, so it arrives stable and ready to blend.", "first": 280, "rows": [["Spec", "Detail"], ["Product", "Organic ginger juice"], ["Origin", "Peru"], ["Certification", "Certified organic"], ["Processing", "Pasteurised and filled aseptically, with lemon juice for stability"], ["Pack sizes", "1L bag, 20L bag-in-box, 200L drum"], ["Shelf life", "3 years unopened, chilled at 0 to 5°C"], ["Availability", "UK and EU from 1 December 2026. USA from 2027"]], "sw": "6"}
 ```
 
 ## photo
@@ -604,6 +614,47 @@ Master template: words with bottles art.
 ### m-bottles-89  (fixed colour: always teal, whatever `chapter` says, so only use it in a chapter of that colour)
 ```json
 {"id": "m-bottles-89", "chapter": "teal", "plate": "final2/89.png", "w": 780, "sf": "#fbe405", "title": "Supplied near you", "standfirst": "Stock in four locations.", "intro": "We hold stock in the USA, the UK, the Netherlands and Ireland, so you get your ingredients in days.", "body": "Order in 1000L IBCs or bag-in-box, raw or pasteurised, and plan production with confidence."}
+```
+
+## flow
+
+A workflow as a diagram: 3 to 6 steps joined by arrows, the last one a decision that splits into two outcomes and where each goes.
+
+### flow-6
+```json
+{"id": "flow-6", "chapter": "sky", "title": "From guide download to the right next step", "standfirst": "The lead enters Pipedrive as an MQL. Sales then qualifies it and routes it into either an active opportunity or separate marketing nurture.", "steps": [["Download guide", "Website visitor requests content"], ["Capture details", "Name, company, email and phone"], ["Create MQL", "Marketing-qualified lead created"], ["Assign in Pipedrive", "Lead record created and owner assigned"], ["Sales outreach", "Sales contacts by phone or email"], ["Qualification", "Assess fit, need and opportunity"]], "split": "Sales qualification outcome", "outcomes": [["Qualified → SQL", "Confirm a genuine business opportunity. Convert the lead to SQL and create a Deal in Pipedrive.", "Active sales pipeline", "Deal progression"], ["Not qualified / not a fit", "Mark as not qualified, remove from the active sales workflow and hand back to Marketing.", "Marketing nurture", "Automated email sequence"]]}
+```
+
+### flow-4
+```json
+{"id": "flow-4", "chapter": "sky", "title": "From sample request to the right next step", "standfirst": "Every sample request gets a reply within one working day.", "steps": [["Request a sample", "A brand asks for a sample of a base"], ["Send the sample", "We ship from stock near them"], ["Trial it", "They test it in their own recipe"], ["Review", "We talk through the results together"]], "split": "Trial outcome", "outcomes": [["Ready to order", "The base works in their recipe and they're ready to place a first order.", "First order", "Shipped from stock near them"], ["Needs more work", "The recipe needs adjusting before they can go ahead.", "Technical support", "Our team helps dial in the dose and the spec"]]}
+```
+
+## criteria
+
+Stages with their criteria: 2 to 4 stages joined by arrows, each with headed points (Entry, Action, Outcome), and a note bar.
+
+### criteria-3
+```json
+{"id": "criteria-3", "chapter": "teal", "title": "Clear criteria at each handover", "standfirst": "Use consistent definitions so Marketing and Sales know what each status means and when ownership changes.", "stages": [["MQL: Marketing Qualified Lead", [["Entry", ["Visitor downloads a guide or other gated content.", "Website form captures available contact details.", "Lead meets agreed basic target-customer criteria."]], ["Action", ["Marketing automation creates or updates the lead in Pipedrive.", "Lead is assigned to a salesperson for follow-up."]]]], ["Sales engagement", [["Entry", ["MQL is visible in Pipedrive and has an owner."]], ["Action", ["Sales attempts contact by phone or email.", "Sales records activity and outcome in Pipedrive.", "Sales assesses business need, fit and potential value."]], ["Outcome", ["Qualified, or not qualified / not a fit."]]]], ["SQL: Sales Qualified Lead", [["Entry", ["Sales confirms a genuine potential opportunity."]], ["Action", ["Update qualification status to SQL.", "Create a Deal in Pipedrive.", "Progress through discovery, meetings and follow-up in the sales pipeline."]], ["Result", ["A measurable, sales-owned opportunity."]]]]], "note": ["Important:", "a guide download creates an MQL for sales review: it does not, by itself, create a Deal or make the lead an SQL."]}
+```
+
+## lanes
+
+Routes as lanes in a black panel: who owns each route, then its stages joined by arrows. 2 or 3 routes.
+
+### lanes-2  (panel: a black panel on the chapter colour)
+```json
+{"id": "lanes-2", "chapter": "pink", "title": "Keep the sales pipeline focused on real opportunities", "standfirst": "Leads that are not ready or not suitable should leave the active sales workflow and move into a separate marketing nurture process.", "lanes": [["Route A", "Qualified", "Owner: Sales", "Sales confirms a genuine business need and fit.", ["MQL", "SQL", "Create Deal", "Active Sales Pipeline"]], ["Route B", "Not qualified / not a fit", "Owner: Marketing", "Sales records the outcome and removes the lead from active sales follow-up.", ["Mark Not Qualified", "Return to Marketing", "Automated Email Nurture"]]]}
+```
+
+## list
+
+A numbered list of 3 to 8 short lines (metrics, measures, checks), words on the left, swirl top right.
+
+### list-swirl  (swirl)
+```json
+{"id": "list-swirl", "chapter": "orange", "sw": "6", "title": "Funnel metrics", "standfirst": "Review performance across the full funnel.", "note": ["Suggested review:", "assess lead quality, conversion and pipeline contribution together, not just the number of leads generated."], "items": ["Inbound guide downloads and form conversions", "MQLs created and assigned to Sales", "Time from MQL creation to first sales contact", "MQL-to-SQL conversion rate", "Meetings generated and Deals created", "Pipeline generated from inbound leads", "Leads returned to Marketing nurture"]}
 ```
 
 ## Photos

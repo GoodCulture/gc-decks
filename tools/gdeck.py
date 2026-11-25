@@ -673,7 +673,7 @@ def r_table(s, deck, n, chap):
     parts = [h2(s["title"], x=0, y=0, w=1400).replace("position:absolute;left:0px;top:0px;", "")]
     if s.get("standfirst"): parts.append(standfirst(s["standfirst"], 1400, size=28))
     tbl = f'<div style="position:absolute;left:78px;top:{y0 + head_h + 48}px">{grid_table(s["rows"], w, s.get("first", 260))}</div>'
-    bg = f'<div style="position:absolute;left:0px;top:0px;width:1920px;height:969px;background:{PAIRS[chap][0]}"></div>'
+    bg = full_bg(plate("full", s["sw"], chap)) if s.get("sw") else f'<div style="position:absolute;left:0px;top:0px;width:1920px;height:969px;background:{PAIRS[chap][0]}"></div>'
     inner = bg + col_block(78, y0, 1400, parts, gap=20) + tbl + footer(deck, n)
     return section(s["id"], WHITE, inner, "Table (recipe: table). Full-width yellow-framed table on the chapter's light colour, headline above. Background to be swapped for one of Luke's.")
 
@@ -690,7 +690,8 @@ def r_table_side(s, deck, n, chap):
     if s.get("body"):
         parts.append(body(s["body"], lw, size=24)); lh += 24 + math.ceil(len(s["body"]) / 42) * 35
     ly = max(60, (969 - lh) // 2); ty = max(60, (969 - th) // 2)
-    bg = f'<div style="position:absolute;left:0px;top:0px;width:1920px;height:969px;background:{PAIRS[chap][0]}"></div>'
+    if s.get("sw"): ty = max(ty, 220)   # clear of the swirl in the top right corner
+    bg = full_bg(plate("full", s["sw"], chap)) if s.get("sw") else f'<div style="position:absolute;left:0px;top:0px;width:1920px;height:969px;background:{PAIRS[chap][0]}"></div>'
     tbl = f'<div style="position:absolute;left:{tx}px;top:{ty}px">{grid_table(s["rows"], tw, s.get("first", 300))}</div>'
     inner = bg + col_block(78, ly, lw, parts, gap=24) + tbl + footer(deck, n)
     return section(s["id"], WHITE, inner, "Table with words (recipe: table_side). Words left, yellow-framed table right, both centred top to bottom, on the chapter's light colour. Background to be swapped for one of Luke's.")
@@ -933,3 +934,141 @@ def build(spec, outdir):
         open(f'{outdir}/project/slides/{s["id"]}.html', "w").write(h)
         order.append(s["id"])
     return order
+
+
+# ---------------- flow diagrams (Luke, 25 Nov) ----------------
+# Process and workflow slides that need real arrows: a step row that branches into two outcomes, stages with their
+# entry and exit criteria, and routes drawn as lanes. Arrows are one inline SVG per slide, drawn in ink or yellow.
+
+def _arrows(lines, col, label):
+    defs = (f'<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">'
+            f'<path d="M0,0 L10,5 L0,10 z" fill="{col}"/></marker></defs>')
+    return (f'<svg aria-label="{esc(label)}" viewBox="0 0 1920 1080" style="position:absolute;left:0px;top:0px;width:1920px;height:1080px">'
+            f'{defs}{"".join(lines)}</svg>')
+
+
+def _line(x1, y1, x2, y2, col=INK):
+    return f'<line x1="{x1:.0f}" y1="{y1:.0f}" x2="{x2:.0f}" y2="{y2:.0f}" stroke="{col}" stroke-width="5" marker-end="url(#a)"/>'
+
+
+def _badge(n, bg=INK, fg=Y):
+    return (f'<p style="width:44px;height:44px;flex:none;border-radius:22px;background:{bg};font-family:{FX};font-size:24px;'
+            f'line-height:44px;text-align:center;color:{fg}">{n}</p>')
+
+
+def _flow_head(s, w=1700):
+    parts = [h2(s["title"], x=0, y=0, w=w).replace("position:absolute;left:0px;top:0px;", "")]
+    if s.get("standfirst"): parts.append(standfirst(s["standfirst"], w, size=28))
+    return col_block(78, 50, w, parts, gap=16)
+
+
+def _colour(chap, sw=None):
+    if sw: return full_bg(plate("full", sw, chap))
+    return f'<div style="position:absolute;left:0px;top:0px;width:1920px;height:969px;background:{PAIRS[chap][0]}"></div>'
+
+
+def r_flow(s, deck, n, chap):
+    # A row of 3 to 6 white step boxes joined by arrows; the last step (the decision) is black. Below it the flow
+    # splits into two outcome cards, each leading to a dark destination box.
+    import math
+    steps = s["steps"]; k = len(steps); assert 3 <= k <= 6, "flow takes 3 to 6 steps"
+    gap = 52; bw = (1764 - gap * (k - 1)) // k
+    cpl = max(8, int((bw - 40) / 12.5))
+    bh = max(200, 110 + max(math.ceil(len(t) / max(8, int((bw - 40) / 16))) * 30 + math.ceil(len(d) / cpl) * 29 for t, d in steps))
+    y0 = 225 if len(s.get("standfirst", "")) > 100 else 205
+    out = [_colour(chap), _flow_head(s)]; L = []
+    for i, (t, d) in enumerate(steps):
+        x = 78 + i * (bw + gap); last = i == k - 1
+        out.append(f'<div style="position:absolute;left:{x}px;top:{y0}px;width:{bw}px;height:{bh}px;box-sizing:border-box;background:{INK if last else WHITE};'
+                   f'padding:20px 20px;display:flex;flex-direction:column;gap:10px">{_badge(i + 1, Y if last else INK, INK if last else Y)}'
+                   f'<h3 style="font-family:{FX};font-weight:400;font-size:27px;line-height:1.1;color:{Y if last else INK}">{esc(t)}</h3>'
+                   f'<p style="font-family:{FR};font-size:24px;line-height:1.2;color:{WHITE if last else INK}">{esc(d)}</p></div>')
+        if not last: L.append(_line(x + bw + 6, y0 + bh / 2, x + bw + gap - 6, y0 + bh / 2))
+    qx = 78 + (k - 1) * (bw + gap) + bw / 2; yb = y0 + bh + 38; oy = yb + 47
+    lx, rx = 78 + 411, 1020 + 411
+    L += [f'<polyline points="{qx:.0f},{y0 + bh} {qx:.0f},{yb} {lx},{yb} {lx},{oy - 7}" fill="none" stroke="{INK}" stroke-width="5" marker-end="url(#a)"/>',
+          _line(rx, yb, rx, oy - 7)]
+    oh = 175; dy = oy + oh + 50
+    L += [_line(lx, oy + oh, lx, dy - 7), _line(rx, oy + oh, rx, dy - 7)]
+    out.insert(1, _arrows(L, INK, "Arrows linking the steps, then branching to the two outcomes"))
+    if s.get("split"):
+        out.append(f'<p style="position:absolute;left:710px;top:{yb - 16}px;width:500px;text-align:center;font-family:{FX};font-size:24px;line-height:1.2;color:{INK}">'
+                   f'<span style="background:{PAIRS[chap][0]};padding:0px 12px">{esc(s["split"])}</span></p>')
+    for x, (t, d, dt, dd) in zip((78, 1020), s["outcomes"]):
+        out.append(f'<div style="position:absolute;left:{x}px;top:{oy}px;width:822px;height:{oh}px;box-sizing:border-box;background:{WHITE};border-left:16px solid {Y};'
+                   f'padding:22px 30px;display:flex;flex-direction:column;gap:10px"><h3 style="font-family:{FX};font-weight:400;font-size:34px;line-height:1.1;color:{INK}">{esc(t)}</h3>'
+                   f'<p style="font-family:{FR};font-size:24px;line-height:1.3;color:{INK}">{esc(d)}</p></div>')
+        out.append(f'<div style="position:absolute;left:{x}px;top:{dy}px;width:822px;height:{min(120, 945 - dy)}px;box-sizing:border-box;background:{PAIRS[chap][1]};'
+                   f'padding:20px 30px;display:flex;flex-direction:column;gap:6px"><h3 style="font-family:{FX};font-weight:400;font-size:30px;line-height:1.1;color:{Y}">{esc(dt)}</h3>'
+                   f'<p style="font-family:{FR};font-size:24px;line-height:1.3;color:{WHITE}">{esc(dd)}</p></div>')
+    return section(s["id"], WHITE, "".join(out) + footer(deck, n),
+                   f"Flow (recipe: flow, {k} steps). A row of steps joined by arrows, the last one the decision, splitting into two outcomes with where each one goes.")
+
+
+def r_criteria(s, deck, n, chap):
+    # 2 to 4 stages as white columns joined by arrows, each with headed groups of points (Entry, Action, Outcome...),
+    # and an optional black note bar under them ("Important: ...").
+    st = s["stages"]; k = len(st); assert 2 <= k <= 4, "criteria takes 2 to 4 stages"
+    gap = 87; cw = (1764 - gap * (k - 1)) // k; top = 225
+    h = 610 if s.get("note") else 690
+    out = [_colour(chap), _flow_head(s)]; L = []
+    for i, (t, groups) in enumerate(st):
+        x = 78 + i * (cw + gap)
+        inner = "".join(f'<p style="font-family:{FX};font-size:24px;line-height:1.2;color:{PAIRS[chap][1]};margin-top:{0 if j == 0 else 14}px">{esc(hd)}</p>'
+                        + "".join(f'<p style="font-family:{FR};font-size:24px;line-height:1.2;color:{INK};padding-left:18px;margin-top:4px">&#8226; {esc(b)}</p>' for b in pts)
+                        for j, (hd, pts) in enumerate(groups))
+        out.append(f'<div style="position:absolute;left:{x}px;top:{top}px;width:{cw}px;height:{h}px;box-sizing:border-box;background:{WHITE};padding:22px 26px;display:flex;flex-direction:column">'
+                   f'<div style="display:flex;flex-direction:row;align-items:center;gap:14px;margin-bottom:14px">{_badge(i + 1)}'
+                   f'<h3 style="font-family:{FX};font-weight:400;font-size:28px;line-height:1.1;color:{INK}">{esc(t)}</h3></div>{inner}</div>')
+        if i < k - 1: L.append(_line(x + cw + 8, top + h / 2, x + cw + gap - 8, top + h / 2))
+    out.insert(1, _arrows(L, INK, "Arrows linking the stages"))
+    if s.get("note"):
+        lab, txt = s["note"]
+        out.append(f'<div style="position:absolute;left:78px;top:860px;width:1764px;box-sizing:border-box;background:{INK};padding:18px 26px">'
+                   f'<p style="font-family:{FR};font-size:24px;line-height:1.3;color:{WHITE}"><span style="font-family:{FX};color:{Y}">{esc(lab)}</span> {esc(txt)}</p></div>')
+    return section(s["id"], WHITE, "".join(out) + footer(deck, n),
+                   f"Criteria (recipe: criteria, {k} stages). Stages joined by arrows, each with its entry, action and outcome points, and a note bar underneath.")
+
+
+def r_lanes(s, deck, n, chap):
+    # 2 or 3 routes drawn as lanes in a black panel on the chapter colour: a label block (route, name, owner) on the
+    # left, a line of text, then the route's stages as yellow boxes joined by yellow arrows, the end point in white.
+    lanes = s["lanes"]; k = len(lanes); assert 2 <= k <= 3, "lanes takes 2 or 3 routes"
+    py, ph = 300, 620; lh = ph // k
+    out = [_colour(chap), _flow_head(s), f'<div style="position:absolute;left:78px;top:{py}px;width:1764px;height:{ph}px;background:{INK}"></div>']
+    L = []
+    for j, (tag, name, owner, desc, chips) in enumerate(lanes):
+        y = py + 45 + j * lh
+        if j: out.append(f'<div style="position:absolute;left:138px;top:{py + j * lh - 1}px;width:1644px;height:2px;background:#4a4a4a"></div>')
+        out.append(f'<div style="position:absolute;left:138px;top:{y}px;width:330px;display:flex;flex-direction:column;gap:8px">'
+                   f'<p style="font-family:{FX};font-size:24px;line-height:1.2;color:{Y}">{esc(tag)}</p>'
+                   f'<h3 style="font-family:{FX};font-weight:400;font-size:38px;line-height:1.05;color:{WHITE}">{esc(name)}</h3>'
+                   f'<p style="font-family:{FR};font-size:24px;line-height:1.3;color:{WHITE}">{esc(owner)}</p></div>'
+                   f'<p style="position:absolute;left:500px;top:{y}px;width:1282px;font-family:{FR};font-size:24px;line-height:1.3;color:{WHITE}">{esc(desc)}</p>')
+        c = len(chips); g = 70; w = (1282 - g * (c - 1)) / c; cy = y + 55; ch = min(120, lh - 110)
+        for i, t in enumerate(chips):
+            x = 500 + i * (w + g); last = i == c - 1
+            out.append(f'<div style="position:absolute;left:{x:.0f}px;top:{cy}px;width:{w:.0f}px;height:{ch}px;box-sizing:border-box;background:{WHITE if last else Y};'
+                       f'padding:0px 20px;display:flex;align-items:center;justify-content:center"><p style="font-family:{FX};font-size:28px;line-height:1.15;text-align:center;color:{INK}">{esc(t)}</p></div>')
+            if not last: L.append(_line(x + w + 8, cy + ch / 2, x + w + g - 8, cy + ch / 2, Y))
+    out.insert(3, _arrows(L, Y, "Arrows linking each stage of the routes"))
+    return section(s["id"], WHITE, "".join(out) + footer(deck, n),
+                   f"Lanes (recipe: lanes, {k} routes). Routes as lanes in a black panel: who owns each, then its stages joined by arrows.")
+
+
+def r_list(s, deck, n, chap):
+    # A numbered list of up to eight short lines in a yellow-framed white panel on the right, the headline, standfirst
+    # and an optional note (bold lead + text) on the left. Takes a swirl in the top right corner.
+    items = s["items"]; assert 3 <= len(items) <= 8, "list takes 3 to 8 lines"
+    rows = "".join(f'<div style="display:flex;flex-direction:row;align-items:center;gap:20px;padding:12px 0px;{"border-top:2px solid #c8c8c8;" if i else ""}">'
+                   f'{_badge(i + 1)}<p style="font-family:{FR};font-size:26px;line-height:1.2;color:{INK}">{esc(t)}</p></div>' for i, t in enumerate(items))
+    ph = 52 + len(items) * 70; py = max(290, (969 - ph) // 2 + 40)   # clear of the swirl
+    parts = [h2(s["title"], x=0, y=0, w=640).replace("position:absolute;left:0px;top:0px;", "")]
+    if s.get("standfirst"): parts.append(standfirst(s["standfirst"], 640, size=28))
+    if s.get("note"):
+        lab, txt = s["note"]
+        parts.append(f'<p style="font-family:{FR};font-size:24px;line-height:1.4;color:{INK};width:640px"><span style="font-family:{FX}">{esc(lab)}</span> {esc(txt)}</p>')
+    out = (_colour(chap, s.get("sw")) + col_block(78, 330, 640, parts, gap=24)
+           + f'<div style="position:absolute;left:800px;top:{py}px;width:1042px;box-sizing:border-box;background:{WHITE};border:10px solid {Y};padding:16px 30px;display:flex;flex-direction:column">{rows}</div>')
+    return section(s["id"], WHITE, out + footer(deck, n),
+                   f"Numbered list (recipe: list, {len(items)} lines). Words left, a yellow-framed numbered list right, swirl top right.")
