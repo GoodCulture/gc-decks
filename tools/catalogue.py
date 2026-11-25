@@ -43,6 +43,10 @@ USE = {
     "mdrinks": "Master template: words left, drinks art right.",
     "mband": "Master template: headline over a dark band of facts, drinks crossing the seam.",
     "mbottles": "Master template: words with bottles art.",
+    "flow": "A workflow as a diagram: 3 to 6 steps joined by arrows, the last one a decision that splits into two outcomes and where each goes.",
+    "criteria": "Stages with their criteria: 2 to 4 stages joined by arrows, each with headed points (Entry, Action, Outcome), and a note bar.",
+    "lanes": "Routes as lanes in a black panel: who owns each route, then its stages joined by arrows. 2 or 3 routes.",
+    "list": "A numbered list of 3 to 8 short lines (metrics, measures, checks), words on the left, swirl top right.",
 }
 
 lines = ["# Component library", "", "Every slide a deck may use. Start each slide with `{\"from\": \"<id>\"}` and change only the words, "

@@ -300,3 +300,47 @@ import json as _json, os as _osp
 _FIXED = _json.load(open(_osp.path.join(_osp.path.dirname(_osp.path.abspath(__file__)), "fixed.json")))
 for _s in COMPONENTS["slides"]:
     if _s["id"] in _FIXED and _s.get("chapter"): _s["chapter"] = _FIXED[_s["id"]]
+
+# Flow diagrams, criteria, routes and lists (Luke, 25 Nov): for process and workflow decks where the arrows matter.
+# Example words are from the marketing to sales lead management deck.
+for _s in list(COMPONENTS["slides"]):
+    if _s["id"] in ("table-full", "table-side"):
+        _v = dict(_s, id=_s["id"] + "-swirl", sw="8" if _s["id"] == "table-full" else "6")
+        COMPONENTS["slides"].insert(COMPONENTS["slides"].index(_s) + 1, _v)
+COMPONENTS["slides"] += [
+ {"r": "flow", "id": "flow-6", "chapter": "sky", "title": "From guide download to the right next step",
+  "standfirst": "The lead enters Pipedrive as an MQL. Sales then qualifies it and routes it into either an active opportunity or separate marketing nurture.",
+  "steps": [["Download guide", "Website visitor requests content"], ["Capture details", "Name, company, email and phone"],
+            ["Create MQL", "Marketing-qualified lead created"], ["Assign in Pipedrive", "Lead record created and owner assigned"],
+            ["Sales outreach", "Sales contacts by phone or email"], ["Qualification", "Assess fit, need and opportunity"]],
+  "split": "Sales qualification outcome",
+  "outcomes": [["Qualified → SQL", "Confirm a genuine business opportunity. Convert the lead to SQL and create a Deal in Pipedrive.", "Active sales pipeline", "Deal progression"],
+               ["Not qualified / not a fit", "Mark as not qualified, remove from the active sales workflow and hand back to Marketing.", "Marketing nurture", "Automated email sequence"]]},
+ {"r": "flow", "id": "flow-4", "chapter": "sky", "title": "From sample request to the right next step",
+  "standfirst": "Every sample request gets a reply within one working day.",
+  "steps": [["Request a sample", "A brand asks for a sample of a base"], ["Send the sample", "We ship from stock near them"],
+            ["Trial it", "They test it in their own recipe"], ["Review", "We talk through the results together"]],
+  "split": "Trial outcome",
+  "outcomes": [["Ready to order", "The base works in their recipe and they're ready to place a first order.", "First order", "Shipped from stock near them"],
+               ["Needs more work", "The recipe needs adjusting before they can go ahead.", "Technical support", "Our team helps dial in the dose and the spec"]]},
+ {"r": "criteria", "id": "criteria-3", "chapter": "teal", "title": "Clear criteria at each handover",
+  "standfirst": "Use consistent definitions so Marketing and Sales know what each status means and when ownership changes.",
+  "stages": [["MQL: Marketing Qualified Lead", [["Entry", ["Visitor downloads a guide or other gated content.", "Website form captures available contact details.", "Lead meets agreed basic target-customer criteria."]],
+                                                ["Action", ["Marketing automation creates or updates the lead in Pipedrive.", "Lead is assigned to a salesperson for follow-up."]]]],
+             ["Sales engagement", [["Entry", ["MQL is visible in Pipedrive and has an owner."]],
+                                   ["Action", ["Sales attempts contact by phone or email.", "Sales records activity and outcome in Pipedrive.", "Sales assesses business need, fit and potential value."]],
+                                   ["Outcome", ["Qualified, or not qualified / not a fit."]]]],
+             ["SQL: Sales Qualified Lead", [["Entry", ["Sales confirms a genuine potential opportunity."]],
+                                            ["Action", ["Update qualification status to SQL.", "Create a Deal in Pipedrive.", "Progress through discovery, meetings and follow-up in the sales pipeline."]],
+                                            ["Result", ["A measurable, sales-owned opportunity."]]]]],
+  "note": ["Important:", "a guide download creates an MQL for sales review: it does not, by itself, create a Deal or make the lead an SQL."]},
+ {"r": "lanes", "id": "lanes-2", "chapter": "pink", "title": "Keep the sales pipeline focused on real opportunities",
+  "standfirst": "Leads that are not ready or not suitable should leave the active sales workflow and move into a separate marketing nurture process.",
+  "lanes": [["Route A", "Qualified", "Owner: Sales", "Sales confirms a genuine business need and fit.", ["MQL", "SQL", "Create Deal", "Active Sales Pipeline"]],
+            ["Route B", "Not qualified / not a fit", "Owner: Marketing", "Sales records the outcome and removes the lead from active sales follow-up.",
+             ["Mark Not Qualified", "Return to Marketing", "Automated Email Nurture"]]]},
+ {"r": "list", "id": "list-swirl", "chapter": "orange", "sw": "6", "title": "Funnel metrics", "standfirst": "Review performance across the full funnel.",
+  "note": ["Suggested review:", "assess lead quality, conversion and pipeline contribution together, not just the number of leads generated."],
+  "items": ["Inbound guide downloads and form conversions", "MQLs created and assigned to Sales", "Time from MQL creation to first sales contact",
+            "MQL-to-SQL conversion rate", "Meetings generated and Deals created", "Pipeline generated from inbound leads", "Leads returned to Marketing nurture"]},
+]
